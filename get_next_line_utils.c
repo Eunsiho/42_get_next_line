@@ -6,11 +6,29 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 23:26:06 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/13 17:52:01 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/17 22:03:49 by hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	char	*str;
+
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -62,6 +80,8 @@ char	*ft_strjoin(char *s1, char *s2);
 	size_t	i;
 	size_t	j;
 
+	if (!s1)
+		s1 = ft_strdup("");
 	if (!s1 || !s2)
 		return (NULL);
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));

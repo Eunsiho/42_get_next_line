@@ -6,7 +6,7 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:25:11 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/13 18:01:32 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/17 22:03:53 by hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # include <unistd.h>
 # include <limits.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-int	ft_no_newline(char *buffer)
+char	*ft_strdup(const char *s1)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int		ft_no_newline(char *buffer);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 
 char	*ft_restart(char *temp)
-char	*ft_cut_temp(char *temp, char *line
+char	*ft_cut_temp(char *temp, char *line);
 char	*ft_read_till_line(int fd, char *temp);
 char	*get_next_line(int fd);
 
