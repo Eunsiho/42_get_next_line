@@ -6,7 +6,7 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 23:02:19 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/18 22:10:09 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/18 22:13:42 by hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_restart(char *temp)
 {
 	size_t	i;
-	size_t	temp_len;
+	size_t	len;
 	char	*str;
 
 	len = ft_strlen(temp);
@@ -31,11 +31,11 @@ char	*ft_restart(char *temp)
 			break ;
 		i++;
 	}
-	len = ft_strlen(temp[i + 1]);
+	len = ft_strlen(&temp[i + 1]);
 	str = (char *)malloc(sizeof(char) *(len + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, temp[i + 1], len + 2);
+	ft_strlcpy(str, &temp[i + 1], len + 2);
 	free(temp);
 	return (str);
 }
@@ -64,6 +64,7 @@ char	*ft_read_till_line(int fd, char *temp)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
+	n = 1;
 	while ((n >= 1) && ft_no_newline(buffer))
 	{
 		n = read(fd, buffer, BUFFER_SIZE);
@@ -86,9 +87,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (0);
+	line = NULL;
 	ft_read_till_line(fd, temp);
 	if (!temp)
-		reutnr (NULL);
+		return (NULL);
 	if (ft_no_newline(temp))
 		return (temp);
 	ft_cut_temp(temp, line);
