@@ -6,7 +6,7 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:25:11 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/18 22:10:09 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/19 22:04:09 by hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 
 char	*ft_restart(char *temp);
-char	*ft_cut_temp(char *temp, char *line);
+char	*ft_cut_temp(char *temp);
 char	*ft_read_till_line(int fd, char *temp);
 char	*get_next_line(int fd);
 

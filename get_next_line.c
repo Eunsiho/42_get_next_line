@@ -6,7 +6,7 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 23:02:19 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/18 22:13:42 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/19 22:39:26 by hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_restart(char *temp)
 	char	*str;
 
 	len = ft_strlen(temp);
-	if (temp[len - 1] == '\n')
+	if (len > 0 && temp[len - 1] == '\n')
 	{
 		free(temp);
 		return (NULL);
@@ -35,14 +35,15 @@ char	*ft_restart(char *temp)
 	str = (char *)malloc(sizeof(char) *(len + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, &temp[i + 1], len + 2);
+	ft_strlcpy(str, &temp[i + 1], len + 1);
 	free(temp);
 	return (str);
 }
 
-char	*ft_cut_temp(char *temp, char *line)
+char	*ft_cut_temp(char *temp)
 {
 	size_t	i;
+	char	*line;
 
 	i = 0;
 	while (temp[i])
@@ -52,6 +53,8 @@ char	*ft_cut_temp(char *temp, char *line)
 		i++;
 	}
 	line = (char *)malloc(sizeof(char) * (i + 2));
+	if (!line)
+		return (NULL);
 	ft_strlcpy(line, temp, i + 2);
 	return (line);
 }
@@ -86,14 +89,16 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
-		return (0);
+		return (NULL);
 	line = NULL;
-	ft_read_till_line(fd, temp);
+	temp = ft_read_till_line(fd, temp);
 	if (!temp)
 		return (NULL);
 	if (ft_no_newline(temp))
 		return (temp);
-	ft_cut_temp(temp, line);
+	line = ft_cut_temp(temp);
+	if (!line)
+		return (NULL);
 	temp = ft_restart(temp);
 	return (line);
 }
