@@ -92,10 +92,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = NULL;
 	temp = ft_read_till_line(fd, temp);
-	if (!temp || !ft_strlen(temp))
+	if (!temp)
 		return (NULL);
 	if (ft_no_newline(temp))
-		return (temp);
+	{
+		line = ft_strdup(temp);
+		temp = NULL;
+		return (line);
+	}
 	line = ft_cut_temp(temp);
 	if (!line)
 		return (NULL);
