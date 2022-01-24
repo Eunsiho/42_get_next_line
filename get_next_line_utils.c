@@ -6,7 +6,7 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 23:26:06 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/19 21:53:10 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/24 23:23:47 by hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,16 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-int	ft_no_newline(char *buffer)
+int	ft_no_newline(char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (1);
 	i = 0;
-	while (i < ft_strlen(buffer))
+	while (s[i])
 	{
-		if (buffer[i] == '\n')
+		if (s[i] == '\n')
 			return (0);
 		i++;
 	}
@@ -82,19 +84,19 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1)
 		s1 = ft_strdup("");
-	if (!s2)
+	if (!s1 || !s2)
 		return (NULL);
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (i < ft_strlen(s1))
+	while (s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (j < ft_strlen(s2))
+	while (s2[j])
 	{
 		str[i + j] = s2[j];
 		j++;

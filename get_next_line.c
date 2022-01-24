@@ -6,7 +6,7 @@
 /*   By: hogkim <hogkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 23:02:19 by hogkim            #+#    #+#             */
-/*   Updated: 2022/01/19 22:39:26 by hogkim           ###   ########.fr       */
+/*   Updated: 2022/01/24 17:23:43hogkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_read_till_line(int fd, char *temp)
 	if (!buffer)
 		return (NULL);
 	n = 1;
-	while ((n >= 1) && ft_no_newline(buffer))
+	while (n && ft_no_newline(buffer))
 	{
 		n = read(fd, buffer, BUFFER_SIZE);
 		if (n == -1)
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = NULL;
 	temp = ft_read_till_line(fd, temp);
-	if (!temp)
+	if (!temp || !ft_strlen(temp))
 		return (NULL);
 	if (ft_no_newline(temp))
 		return (temp);
