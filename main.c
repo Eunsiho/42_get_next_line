@@ -6,10 +6,10 @@
 
 int main()
 {
-    int fd = open("files/41_no_nl", O_RDONLY);
+    int fd = open("files/42_no_nl", O_RDONLY);
     int i = 0;
     char *nl;
-    
+
     while (i < 10)
     {
         nl = get_next_line(fd);

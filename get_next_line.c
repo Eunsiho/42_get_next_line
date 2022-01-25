@@ -19,23 +19,18 @@ char	*ft_restart(char *temp)
 	char	*str;
 
 	len = ft_strlen(temp);
-	if (len > 0 && temp[len - 1] == '\n')
+	if (!temp)
 	{
 		free(temp);
 		return (NULL);
 	}
 	i = 0;
-	while (temp[i])
-	{
-		if (temp[i] == '\n')
-			break ;
+	while (temp[i] && (temp[i] != '\n'))
 		i++;
-	}
-	len = ft_strlen(&temp[i + 1]);
-	str = (char *)malloc(sizeof(char) *(len + 1));
+	str = (char *)malloc(sizeof(char) * (len - i + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, &temp[i + 1], len + 1);
+	ft_strlcpy(str, &temp[i + 1], len -i + 2);
 	free(temp);
 	return (str);
 }
@@ -45,6 +40,8 @@ char	*ft_cut_temp(char *temp)
 	size_t	i;
 	char	*line;
 
+	if (!temp[0])
+		return (NULL);
 	i = 0;
 	while (temp[i])
 	{
@@ -52,6 +49,8 @@ char	*ft_cut_temp(char *temp)
 			break ;
 		i++;
 	}
+	if (ft_strlen(temp) == i)
+		i--;
 	line = (char *)malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
@@ -68,7 +67,7 @@ char	*ft_read_till_line(int fd, char *temp)
 	if (!buffer)
 		return (NULL);
 	n = 1;
-	while (n && ft_no_newline(buffer))
+	while (n && ft_no_newline(temp))
 	{
 		n = read(fd, buffer, BUFFER_SIZE);
 		if (n == -1)
@@ -90,15 +89,13 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = NULL;
 	temp = ft_read_till_line(fd, temp);
 	if (!temp)
 		return (NULL);
-	if (ft_no_newline(temp))
+	if (!ft_strlen(temp))
 	{
-		line = ft_strdup(temp);
-		temp = NULL;
-		return (line);
+		free(temp);
+		return (NULL);
 	}
 	line = ft_cut_temp(temp);
 	if (!line)
