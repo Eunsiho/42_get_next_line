@@ -43,15 +43,9 @@ char	*ft_cut_temp(char *temp)
 	if (!temp[0])
 		return (NULL);
 	i = 0;
-	while (temp[i])
-	{
-		if (temp[i] == '\n')
-			break ;
+	while ((temp[i] != '\n') && temp[i])
 		i++;
-	}
-	if (ft_strlen(temp) == i)
-		i--;
-	line = (char *)malloc(sizeof(char) * (i + 2));
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
 	ft_strlcpy(line, temp, i + 2);
@@ -92,14 +86,7 @@ char	*get_next_line(int fd)
 	temp = ft_read_till_line(fd, temp);
 	if (!temp)
 		return (NULL);
-	if (!ft_strlen(temp))
-	{
-		free(temp);
-		return (NULL);
-	}
 	line = ft_cut_temp(temp);
-	if (!line)
-		return (NULL);
 	temp = ft_restart(temp);
 	return (line);
 }
