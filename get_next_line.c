@@ -19,18 +19,18 @@ char	*ft_restart(char *temp)
 	char	*str;
 
 	len = ft_strlen(temp);
-	if (!temp)
+	i = 0;
+	while (temp[i] && (temp[i] != '\n'))
+		i++;
+	if (!temp[i])
 	{
 		free(temp);
 		return (NULL);
 	}
-	i = 0;
-	while (temp[i] && (temp[i] != '\n'))
-		i++;
-	str = (char *)malloc(sizeof(char) * (len - i + 1));
+	str = (char *)malloc(sizeof(char) * (len - i));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, &temp[i + 1], len -i + 2);
+	ft_strlcpy(str, &temp[i + 1], len - i + 1);
 	free(temp);
 	return (str);
 }
