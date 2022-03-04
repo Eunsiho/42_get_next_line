@@ -24,8 +24,7 @@ char	*ft_restart(char *temp)
 		i++;
 	if (!temp[i])
 	{
-		free(temp);
-		return (NULL);
+
 	}
 	str = (char *)malloc(sizeof(char) * (len - i));
 	if (!str)

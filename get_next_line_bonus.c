@@ -78,15 +78,15 @@ char	*ft_read_till_line(int fd, char *temp)
 
 char	*get_next_line(int fd)
 {
-	static char	*temp;
+	static char	*temp[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	temp = ft_read_till_line(fd, temp);
-	if (!temp)
+	temp[fd] = ft_read_till_line(fd, temp[fd]);
+	if (!temp[fd])
 		return (NULL);
-	line = ft_cut_temp(temp);
-	temp = ft_restart(temp);
+	line = ft_cut_temp(temp[fd]);
+	temp[fd] = ft_restart(temp[fd]);
 	return (line);
 }
