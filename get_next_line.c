@@ -24,12 +24,13 @@ char	*ft_restart(char *temp)
 		i++;
 	if (!temp[i])
 	{
-
+		free(temp);
+		return (NULL);
 	}
 	str = (char *)malloc(sizeof(char) * (len - i));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, &temp[i + 1], len - i + 1);
+	ft_strlcpy(str, &temp[i + 1], len - i);
 	free(temp);
 	return (str);
 }
