@@ -22,7 +22,7 @@ char	*ft_restart(char *temp)
 	i = 0;
 	while (temp[i] && (temp[i] != '\n'))
 		i++;
-	if (!temp[i])
+	if (!temp[i] || (len - i) == 1)
 	{
 		free(temp);
 		return (NULL);
@@ -45,10 +45,20 @@ char	*ft_cut_temp(char *temp)
 	i = 0;
 	while ((temp[i] != '\n') && temp[i])
 		i++;
-	line = (char *)malloc(sizeof(char) * (i + 1));
-	if (!line)
-		return (NULL);
-	ft_strlcpy(line, temp, i + 2);
+	if (temp[i] == '\n')
+	{
+		line = (char *)malloc(sizeof(char) * (i + 2));
+		if (!line)
+			return (NULL);
+		ft_strlcpy(line, temp, i + 2);
+	}
+	else
+	{
+		line = (char *)malloc(sizeof(char) * (i + 1));
+		if (!line)
+			return (NULL);
+		ft_strlcpy(line, temp, i + 1);
+	}
 	return (line);
 }
 
